@@ -50,4 +50,31 @@ public class DummyController {
                 date
         );
     }
+
+    /**
+     * /api/dummy/{message}/{count}/{date}
+     * @param message
+     * @param count
+     * @param date
+     * @return
+     */
+    @PostMapping("{message}/{count}/{date}")
+    String mirrorWithPathParam(
+        @PathVariable("message") String message,
+        @PathVariable("count") int count,
+        @PathVariable("date") LocalDate date
+    ) {
+        var messageRepeated = IntStream.range(0, count)
+                .mapToObj(i -> message)
+                .collect(Collectors.joining(", "));
+        return MessageFormat.format("say: {0} ({1})",
+                messageRepeated,
+                date
+        );
+    }
+
+    @PostMapping("mirror")
+    public String mirrorWithBodyParam(@RequestBody String message){
+        return "say: " + message;
+    }
 }
