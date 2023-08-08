@@ -2,6 +2,7 @@ package org.example.movieapi.controller;
 
 import org.example.movieapi.dto.MovieCreate;
 import org.example.movieapi.dto.MovieDetail;
+import org.example.movieapi.dto.MovieSimple;
 import org.example.movieapi.error.HttpExceptions;
 import org.example.movieapi.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,8 @@ public class MovieController {
     private MovieService movieService;
 
     @GetMapping
-    public List<MovieCreate> getAllMovies(){
-        // TODO
-        return List.of(
-                new MovieCreate(),
-                new MovieCreate()
-        );
+    public List<MovieSimple> getAllMovies(){
+       return movieService.getAll();
     }
 
     @GetMapping("{id}")
@@ -41,9 +38,9 @@ public class MovieController {
     }
 
     @PostMapping
-    public MovieCreate add(@RequestBody MovieCreate movie){
-        // TODO
-        return movie;
+    public MovieSimple add(@RequestBody MovieCreate movie){
+        // TODO: deal with exception DataAccessException
+        return movieService.add(movie);
     }
 
     @PutMapping("{id}")
