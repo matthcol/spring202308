@@ -2,6 +2,7 @@ package org.example.movieapi.controller;
 
 import org.example.movieapi.dto.MovieCreate;
 import org.example.movieapi.dto.MovieDetail;
+import org.example.movieapi.error.HttpExceptions;
 import org.example.movieapi.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,14 @@ public class MovieController {
 
     @GetMapping("{id}")
     public MovieDetail getById(@PathVariable("id") int id){
-        var optMovie = movieService.getById(id);
-        if (optMovie.isPresent()) {
-            return optMovie.get();
-        } else {
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    MessageFormat.format("Movie not found with id <{0}>", id));
-        }
+        //        var optMovie = movieService.getById(id);
+        //        if (optMovie.isPresent()) {
+        //            return optMovie.get();
+        //        } else {
+        //            throw HttpExceptions.notFoundException("Movie", id);
+        //        }
+        return movieService.getById(id)
+                .orElseThrow(() -> HttpExceptions.notFoundException("Movie", id));
     }
 
     @PostMapping
