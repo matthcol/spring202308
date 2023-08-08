@@ -37,10 +37,13 @@ class MovieControllerTest {
     @Test
     void testGetById_found() throws Exception {
         // given/facts
+        // id to find
         int id = 123;
+        // movie sent by mock service
         String title = "The Batman";
         short year = 2022;
         var movie = MovieDetail.builder()
+                .id(id)
                 .title(title)
                 .year(year)
                 // TODO: with all details
@@ -62,7 +65,7 @@ class MovieControllerTest {
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.title").value(title))
-                .andExpect(jsonPath("$.year").value(year));
+                .andExpect(jsonPath("$.year").value((int) year));
         // then/verify: check mock service has been called
         then(movieService)
                 .should()

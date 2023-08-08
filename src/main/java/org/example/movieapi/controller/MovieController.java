@@ -1,11 +1,14 @@
 package org.example.movieapi.controller;
 
 import org.example.movieapi.dto.MovieCreate;
+import org.example.movieapi.dto.MovieDetail;
 import org.example.movieapi.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 @RestController
@@ -25,9 +28,15 @@ public class MovieController {
     }
 
     @GetMapping("{id}")
-    public MovieCreate getById(@PathVariable("id") int id){
-        // TODO
-        return new MovieCreate();
+    public MovieDetail getById(@PathVariable("id") int id){
+        var optMovie = movieService.getById(id);
+        if (optMovie.isPresent()) {
+            return optMovie.get();
+        } else {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    MessageFormat.format("Movie not found with id <{0}>", id));
+        }
     }
 
     @PostMapping
