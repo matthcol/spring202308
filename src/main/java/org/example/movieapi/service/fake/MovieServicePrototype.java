@@ -9,16 +9,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service // for DI discovery
 public class MovieServicePrototype implements MovieService {
     @Override
     public Optional<MovieDetail> getById(int id) {
-        return Optional.empty();
+        // return Optional.empty();
+        return Optional.of(MovieDetail.builder()
+                .id(id)
+                .title("Fake Movie")
+                .year((short) 2023)
+                .build()
+        );
     }
 
     @Override
     public List<MovieSimple> getAll() {
-        return null;
+        return List.of();
     }
 
     @Override
