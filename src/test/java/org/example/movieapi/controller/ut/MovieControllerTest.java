@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.swing.text.html.Option;
 import java.text.MessageFormat;
@@ -19,7 +20,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(MovieController.class) // controller to test here
 class MovieControllerTest {
@@ -56,8 +57,12 @@ class MovieControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 // then/verify: HTTP response
-                .andExpect(status().isOk());
-        // TODO: check JSON content
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.title").value(title))
+                .andExpect(jsonPath("$.year").value(year));
         // then/verify: check mock service has been called
         then(movieService)
                 .should()
