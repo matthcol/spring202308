@@ -26,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MovieControllerTest {
 
     final static String BASE_URI = "/api/movies";
+    final static String TEMPLATE_URI_WITH_ID = BASE_URI + "/{id}";
 
     // client to perform HTTP requests
     @Autowired
@@ -50,13 +51,8 @@ class MovieControllerTest {
                 .build();
         given(movieService.getById(id))
                 .willReturn(Optional.of(movie));
-        String uri = MessageFormat.format(
-                "{0}/{1}",
-                BASE_URI,
-                id
-        );
         // when
-        mockMvc.perform(get(uri)
+        mockMvc.perform(get(TEMPLATE_URI_WITH_ID, id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 // then/verify: HTTP response
@@ -78,13 +74,8 @@ class MovieControllerTest {
         int id = 0;
         given(movieService.getById(id))
                 .willReturn(Optional.empty());
-        String uri = MessageFormat.format(
-                "{0}/{1}",
-                BASE_URI,
-                id
-        );
         // when
-        mockMvc.perform(get(uri)
+        mockMvc.perform(get(TEMPLATE_URI_WITH_ID, id)
                     .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 // then/verify: HTTP response
