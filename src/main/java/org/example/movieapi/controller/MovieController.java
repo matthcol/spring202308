@@ -1,5 +1,6 @@
 package org.example.movieapi.controller;
 
+import jakarta.validation.Valid;
 import org.example.movieapi.dto.MovieCreate;
 import org.example.movieapi.dto.MovieDetail;
 import org.example.movieapi.dto.MovieSimple;
@@ -38,13 +39,13 @@ public class MovieController {
     }
 
     @PostMapping
-    public MovieSimple add(@RequestBody MovieCreate movie){
+    public MovieSimple add(@Valid @RequestBody MovieCreate movie){
         // TODO: deal with exception DataAccessException
         return movieService.add(movie);
     }
 
     @PutMapping("{id}")
-    public MovieCreate update(@RequestBody MovieCreate movie) {
+    public MovieCreate update(@Valid @RequestBody MovieCreate movie) {
         // TODO
         return movie;
     }
