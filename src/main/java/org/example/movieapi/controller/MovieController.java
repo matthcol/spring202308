@@ -39,20 +39,23 @@ public class MovieController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public MovieSimple add(@Valid @RequestBody MovieCreate movie){
         // TODO: deal with exception DataAccessException
         return movieService.add(movie);
     }
 
     @PutMapping("{id}")
-    public MovieCreate update(@Valid @RequestBody MovieCreate movie) {
-        // TODO
-        return movie;
+    public MovieDetail update(@PathVariable("id") int id, @Valid @RequestBody MovieCreate movie) {
+        // TODO: deal with exception DataAccessException
+        return movieService.update(movie, id)
+                .orElseThrow(() -> HttpExceptions.notFoundException("Movie", id));
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id){
-        // TODO
+        // TODO: deal with exception DataAccessException
+        if (!movieService.delete(id)) throw HttpExceptions.notFoundException("Movie", id);
     }
 }
