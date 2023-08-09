@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 @Entity
 @Table(
         name = "movies",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"title", "year"})
+        uniqueConstraints = @UniqueConstraint(
+                columnNames = {"title", "year"}
+                // columnNames = {"title", "release_year"}
+        )
 )
 public class Movie {
     @Id
@@ -14,6 +17,8 @@ public class Movie {
 
     @Column(nullable = false, length = 300)
     private String title;
+
+    //@Column(name = "release_year")
     private short year;
     private Short duration;
 
