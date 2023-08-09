@@ -6,6 +6,7 @@ import org.example.movieapi.entity.Movie;
 import org.example.movieapi.repository.MovieRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,10 +109,23 @@ public class MovieRepositoryDemoQueries {
     }
 
     @ParameterizedTest
-    @ValueSource(strings={"star", "Star", "STAR"}
-    )
+    @ValueSource(strings={"star", "Star", "STAR"})
     void findByTitleContaingIgnoreCase(String partialTitle){
-        var movies = movieRepository.findByTitleContainingIgnoringCase(partialTitle);
+        var movies = movieRepository.findByTitleContainingIgnoreCase(partialTitle);
+        System.out.println("Movie count: " + movies.size());
+        movies.stream()
+                .limit(50)
+                .forEach(System.out::println);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1980,1989",
+            "2018,2019",
+            "1989,1980"
+    })
+    void testFindByYearBetweenOrderByYear(short year1, short year2){
+        var movies = movieRepository.findByYearBetweenOrderByYearAscTitleAsc(year1, year2);
         System.out.println("Movie count: " + movies.size());
         movies.stream()
                 .limit(50)

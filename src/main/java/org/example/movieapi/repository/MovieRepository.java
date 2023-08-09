@@ -7,12 +7,16 @@ import java.util.List;
 
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
+    // Spring JPA vocabulary for method name generating SQL automatically
+    // https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
     List<Movie> findByTitle(String title);
 
     List<Movie> findByTitleContaining(String title);
 
-    List<Movie> findByTitleContainingIgnoringCase(String title);
+    List<Movie> findByTitleContainingIgnoreCase(String title);
 
-    List<Movie> findByYearBetweenOrderByYear(short year1, short year2);
+    List<Movie> findByYearBetweenOrderByYearAscTitleAsc(short year1, short year2);
+
+    // by partial title and minimum duration + param Sort
 
 }
