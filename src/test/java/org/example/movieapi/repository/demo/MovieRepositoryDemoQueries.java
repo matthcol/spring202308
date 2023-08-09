@@ -7,6 +7,7 @@ import org.example.movieapi.repository.MovieRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -90,6 +91,27 @@ public class MovieRepositoryDemoQueries {
     @MethodSource("movieExampleSource")
     void findAllExample(Example<Movie> movieExample){
         var movies = movieRepository.findAll(movieExample);
+        System.out.println("Movie count: " + movies.size());
+        movies.stream()
+                .limit(50)
+                .forEach(System.out::println);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings={"star", "Star", "STAR"})
+    void findByTitleContaing(String partialTitle){
+        var movies = movieRepository.findByTitleContaining(partialTitle);
+        System.out.println("Movie count: " + movies.size());
+        movies.stream()
+                .limit(50)
+                .forEach(System.out::println);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings={"star", "Star", "STAR"}
+    )
+    void findByTitleContaingIgnoreCase(String partialTitle){
+        var movies = movieRepository.findByTitleContainingIgnoringCase(partialTitle);
         System.out.println("Movie count: " + movies.size());
         movies.stream()
                 .limit(50)
