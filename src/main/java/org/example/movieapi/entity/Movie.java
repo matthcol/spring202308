@@ -1,6 +1,7 @@
 package org.example.movieapi.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(
@@ -10,6 +11,12 @@ import jakarta.persistence.*;
                 // columnNames = {"title", "release_year"}
         )
 )
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
+@ToString(of = {"id", "title", "year"})
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
