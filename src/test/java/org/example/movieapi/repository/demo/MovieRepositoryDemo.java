@@ -28,7 +28,7 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 // do not rollback transaction after each test (default behaviour)
 @Rollback(value = false)
 @TestMethodOrder(OrderAnnotation.class)
-class MovieRepositoryDemo {
+class MovieRepositoryDemoH2 {
 
     @Autowired
     MovieRepository movieRepository;
@@ -73,4 +73,12 @@ class MovieRepositoryDemo {
         var optMovie = movieRepository.findById(id);
         System.out.println(optMovie);
     }
+
+    @ParameterizedTest
+    @ValueSource(ints={1,2,3,4})
+    @Order(5)
+    void deleteById(int id) {
+        movieRepository.deleteById(id);
+    }
+
 }
