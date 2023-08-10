@@ -6,6 +6,7 @@ import org.example.movieapi.dto.MovieSimple;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface MovieService {
 
@@ -40,6 +41,23 @@ public interface MovieService {
      * @throws org.springframework.dao.DataIntegrityViolationException if movie found and couldn't be updated
      */
     Optional<MovieDetail> update(MovieCreate movie, int id);
+
+    /**
+     * update an existing movie to set its director
+     * @param movieId id of movie to update (must be in the database)
+     * @param directorId id of movie director (must be in the database)
+     * @return optional with movie updated if movie and director have been found else optional empty
+     */
+    Optional<MovieDetail> updateDirector(int movieId, int directorId);
+
+    /***
+     * update an existing movie to set its actors
+     * @param movieId id of movie to update (must be in the database)
+     * @param actorIds id of movie actors (all must be in the database)
+     * @return optional with movie updated if movie and all actors have been found else optional empty
+     */
+    Optional<MovieDetail> updateActors(int movieId, Set<Integer> actorIds);
+
 
     /**
      * delete movie with its id

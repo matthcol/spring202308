@@ -1,6 +1,7 @@
 package org.example.movieapi.controller;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.example.movieapi.dto.MovieCreate;
 import org.example.movieapi.dto.MovieDetail;
 import org.example.movieapi.dto.MovieSimple;
@@ -13,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.text.MessageFormat;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/movies")
@@ -50,6 +52,22 @@ public class MovieController {
         // TODO: deal with exception DataAccessException
         return movieService.update(movie, id)
                 .orElseThrow(() -> HttpExceptions.notFoundException("Movie", id));
+    }
+
+    @PatchMapping("{mid}/director/{did}")
+    public MovieDetail updateDirector(
+            @PathVariable("mid") int movieId,
+            @PathVariable("did") int directorId)
+    {
+        return null;
+    }
+
+    @PatchMapping("{mid}/actors")
+    public MovieDetail updateActors(
+            @PathVariable("mid") int movieId,
+            @RequestBody Set<@NotNull Integer> actorIds)
+    {
+        return null;
     }
 
     @DeleteMapping("{id}")

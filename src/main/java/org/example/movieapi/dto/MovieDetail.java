@@ -1,18 +1,20 @@
 package org.example.movieapi.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Set;
 
 /**
  * represents a movie with all details: director, actors
  */
-@Data
 @NoArgsConstructor
-// @AllArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString(callSuper = true)
 @SuperBuilder
 public class MovieDetail extends MovieSimple {
-    // TODO: director
-    // TODO: actors
+    private PersonSimple director;
+    private Set<PersonSimple> actors;
 }
