@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.example</groupId>
 	<artifactId>movieapi</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>movieapi</name>
 	<description>Movie Rest API</description>
 	<properties>

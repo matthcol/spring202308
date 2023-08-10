@@ -1,7 +1,8 @@
 package org.example.movieapi.controller.ut;
 
 import org.example.movieapi.controller.MovieController;
-import org.example.movieapi.controller.fixture.JsonProvider;
+import org.example.movieapi.controller.assertions.Matchers;
+import org.example.movieapi.controller.fixture.JsonProviders;
 import org.example.movieapi.dto.MovieDetail;
 import org.example.movieapi.dto.MovieSimple;
 import org.example.movieapi.service.MovieService;
@@ -13,15 +14,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import javax.swing.text.html.Option;
-import java.text.MessageFormat;
-import java.util.Objects;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.example.movieapi.controller.assertions.Matchers.jsonPathIsNullOrEquals;
+import static org.example.movieapi.controller.assertions.Matchers.jsonPathIsNullOrEqualsShort;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
@@ -111,7 +108,7 @@ class MovieControllerTest {
     void testAdd_valid(String message, String title, Short year, Short duration, String synopsis) throws Exception {
         // given
         // JSON movie to add
-        var movieJSON = JsonProvider.movieJSON(title,year,duration,synopsis);
+        var movieJSON = JsonProviders.movieJSON(title,year,duration,synopsis);
         // DTO movie returned by mock service
         int id = 321;
         var movieDto = MovieSimple.builder()
@@ -136,8 +133,8 @@ class MovieControllerTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.title").value(title))
                 .andExpect(jsonPath("$.year").value((int) year))
-                .andExpect(jsonPath("$.duration").value((int) duration))
-                .andExpect(jsonPath("$.synopsis").value(synopsis));
+                .andExpect(jsonPathIsNullOrEqualsShort("$.duration", duration))
+                .andExpect(jsonPathIsNullOrEquals("$.synopsis", synopsis));
 
         // 3b - verify: mock service has been called
         then(movieService)
@@ -162,7 +159,7 @@ class MovieControllerTest {
     void testAdd_invalid(String message, String title, Short year, Short duration, String synopsis) throws Exception {
         // 1 - given
         // JSON movie to add
-        var movieJSON = JsonProvider.movieJSON(title,year,duration,synopsis);
+        var movieJSON = JsonProviders.movieJSON(title,year,duration,synopsis);
 
         // 2 - when
         mockMvc.perform(post(BASE_URI)

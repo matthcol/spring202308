@@ -69,7 +69,7 @@ public class MovieController {
             @RequestBody Set<@NotNull Integer> actorIds)
     {
         return movieService.updateActors(movieId, actorIds)
-                .orElseThrow(() -> HttpExceptions.notFoundException("Movie", movieId, "Person", actorIds));
+                .orElseThrow(() -> HttpExceptions.notFoundException("Movie", movieId, "Person", actorIds.toArray()));
     }
 
     @DeleteMapping("{id}")

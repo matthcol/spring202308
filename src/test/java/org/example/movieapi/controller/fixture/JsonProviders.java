@@ -2,7 +2,7 @@ package org.example.movieapi.controller.fixture;
 
 import java.util.Objects;
 
-public class JsonProvider {
+public class JsonProviders {
 
     private static <T> boolean addField(
             StringBuilder builder,
