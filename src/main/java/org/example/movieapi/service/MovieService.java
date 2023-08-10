@@ -28,7 +28,7 @@ public interface MovieService {
      * add a new Movie
      * @param movie movie to add
      * @return movie added with its id
-     * @throws org.springframework.dao.DataAccessException if movie couldn't be added
+     * @throws org.springframework.dao.DataIntegrityViolationException if movie couldn't be added
      */
     MovieSimple add(MovieCreate movie);
 
@@ -37,7 +37,7 @@ public interface MovieService {
      * @param movie new content
      * @param id id of the movie to update
      * @return optional with movie updated if found else optional empty
-     * @throws org.springframework.dao.DataAccessException if movie found and couldn't be updated
+     * @throws org.springframework.dao.DataIntegrityViolationException if movie found and couldn't be updated
      */
     Optional<MovieDetail> update(MovieCreate movie, int id);
 
@@ -45,7 +45,7 @@ public interface MovieService {
      * delete movie with its id
      * @param id id of the movie to delete
      * @return true if movie found and deleted, false if not found
-     * @throws org.springframework.dao.DataAccessException if movie found and couldn't be deleted
+     * @throws org.springframework.dao.DataIntegrityViolationException if movie found and couldn't be deleted
      */
     boolean delete(int id);
 }
