@@ -227,6 +227,40 @@
 					"response": []
 				},
 				{
+					"name": "by id New Movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/8079249",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"8079249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by iKO not found",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/0",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "new movie partial",
 					"request": {
 						"method": "POST",
@@ -434,17 +468,51 @@
 					"response": []
 				},
 				{
-					"name": "by id",
+					"name": "by id New Movie",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url_movie_controller}}/123",
+							"raw": "{{url_movie_controller}}/8079249",
 							"host": [
 								"{{url_movie_controller}}"
 							],
 							"path": [
-								"123"
+								"8079249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id Old Movie with casting",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/76759",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"76759"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id KO not found",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/0",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"0"
 							]
 						}
 					},
@@ -457,7 +525,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022,\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\"\r\n}",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022,\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\",\r\n    \"genres\": [\"Action\", \"Super Heroes\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -465,12 +533,64 @@
 							}
 						},
 						"url": {
-							"raw": "{{url_movie_controller}}/123",
+							"raw": "{{url_movie_controller}}/8079249",
 							"host": [
 								"{{url_movie_controller}}"
 							],
 							"path": [
-								"123"
+								"8079249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update movie KO not found",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022,\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\",\r\n    \"genres\": [\"Action\", \"Super Heroes\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}/0",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update movie KO not unique",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Terminator\",\r\n    \"year\": 1984,\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\",\r\n    \"genres\": [\"Action\", \"Super Heroes\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}/8079249",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"8079249"
 							]
 						}
 					},
