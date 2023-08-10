@@ -1,0 +1,574 @@
+{
+	"info": {
+		"_postman_id": "cde42875-be22-41c2-a864-69654c551146",
+		"name": "Spring202308",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13699723"
+	},
+	"item": [
+		{
+			"name": "DummyController",
+			"item": [
+				{
+					"name": "coucou",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_dummy_controller}}",
+							"host": [
+								"{{url_dummy_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hour",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url_dummy_controller}}/hour",
+							"host": [
+								"{{url_dummy_controller}}"
+							],
+							"path": [
+								"hour"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "hour KO not acceptable",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url_dummy_controller}}/hour",
+							"host": [
+								"{{url_dummy_controller}}"
+							],
+							"path": [
+								"hour"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "KO method not allowed",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_dummy_controller}}",
+							"host": [
+								"{{url_dummy_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mirror with query param",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_dummy_controller}}?m=spring",
+							"host": [
+								"{{url_dummy_controller}}"
+							],
+							"query": [
+								{
+									"key": "m",
+									"value": "spring"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mirror with query param optional",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_dummy_controller}}?m=spring&n=4&d=2020-02-29",
+							"host": [
+								"{{url_dummy_controller}}"
+							],
+							"query": [
+								{
+									"key": "m",
+									"value": "spring"
+								},
+								{
+									"key": "n",
+									"value": "4"
+								},
+								{
+									"key": "d",
+									"value": "2020-02-29"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mirror with query KO conversion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_dummy_controller}}?m=spring&n=quatre",
+							"host": [
+								"{{url_dummy_controller}}"
+							],
+							"query": [
+								{
+									"key": "m",
+									"value": "spring"
+								},
+								{
+									"key": "n",
+									"value": "quatre"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mirror with path params",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"springboot\"",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_dummy_controller}}/mirror",
+							"host": [
+								"{{url_dummy_controller}}"
+							],
+							"path": [
+								"mirror"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MovieController",
+			"item": [
+				{
+					"name": "all movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/76759",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"76759"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie partial",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie all fields",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022,\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO missing title",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"year\": 2022\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO title blank empty",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"\",\r\n    \"year\": 2022\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO title blank spaces",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"  \",\r\n    \"year\": 2022\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO missing year",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO year less than minimum",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 1789\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO year not a short",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": \"last year\",\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "new movie KO extra field",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022,\r\n    \"note\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}",
+							"host": [
+								"{{url_movie_controller}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/123",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update movie",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"The Batman\",\r\n    \"year\": 2022,\r\n    \"duration\": 150,\r\n    \"synopsis\": \"A movie with the famous Batman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}/123",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"123"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accueil (default)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url_base}}",
+					"host": [
+						"{{url_base}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Acueil (HTML)",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url_base}}",
+					"host": [
+						"{{url_base}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "port",
+			"value": "8080",
+			"type": "string"
+		},
+		{
+			"key": "url_base",
+			"value": "http://{{host}}:{{port}}",
+			"type": "string"
+		},
+		{
+			"key": "url_dummy_controller",
+			"value": "{{url_base}}/api/dummy",
+			"type": "string"
+		},
+		{
+			"key": "url_movie_controller",
+			"value": "{{url_base}}/api/movies",
+			"type": "string"
+		}
+	]
+}
