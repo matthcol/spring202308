@@ -28,7 +28,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ErrorHandler  {
 
     @ResponseStatus(value = HttpStatus.CONFLICT, reason="Data Integrity Violation")
-    @ExceptionHandler(DataAccessException.class)
+    @ExceptionHandler(DataIntegrityViolationException.class)
     public void handleDaoDataIntegrityViolationException() {
         // response is handled by annotation @ResponseStatus
     }
