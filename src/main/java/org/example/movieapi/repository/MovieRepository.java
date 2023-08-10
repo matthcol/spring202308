@@ -17,6 +17,10 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findByYearBetweenOrderByYearAscTitleAsc(short year1, short year2);
 
-    // by partial title and minimum duration + param Sort
+    // Exo: by partial title and minimum duration + param Sort
+
+    // TODO: methods with query JPQL
+
+    // TODO: filmography, stats
 
 }

@@ -6,9 +6,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * movie to be created in the API
@@ -36,5 +40,7 @@ public class MovieCreate {
     private String synopsis;
 
     // TODO: pg
-    // TODO: genres
+
+    @Builder.Default
+    private Set<@NotBlank @Size(min=3) String> genres = new HashSet<>();
 }

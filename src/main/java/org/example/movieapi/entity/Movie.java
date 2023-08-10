@@ -3,6 +3,9 @@ package org.example.movieapi.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(
         name = "movies",
@@ -31,4 +34,13 @@ public class Movie {
 
     @Column(length = 4000)
     private String synopsis;
+
+    @Transient // ignore by JPA
+    @Builder.Default
+    private Set<String> genres = new HashSet<>();
+
+    // TODO: enum Pg
+    // TODO: genres
+    // TODO: director
+    // TODO: actors
 }
