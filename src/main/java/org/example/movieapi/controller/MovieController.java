@@ -59,7 +59,8 @@ public class MovieController {
             @PathVariable("mid") int movieId,
             @PathVariable("did") int directorId)
     {
-        return null;
+        return movieService.updateDirector(movieId, directorId)
+                .orElseThrow(() -> HttpExceptions.notFoundException("Movie", movieId, "Person", directorId));
     }
 
     @PatchMapping("{mid}/actors")
@@ -67,13 +68,13 @@ public class MovieController {
             @PathVariable("mid") int movieId,
             @RequestBody Set<@NotNull Integer> actorIds)
     {
-        return null;
+        return movieService.updateActors(movieId, actorIds)
+                .orElseThrow(() -> HttpExceptions.notFoundException("Movie", movieId, "Person", actorIds));
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") int id){
-        // TODO: deal with exception DataAccessException
         if (!movieService.delete(id)) throw HttpExceptions.notFoundException("Movie", id);
     }
 }
