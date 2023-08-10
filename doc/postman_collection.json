@@ -519,6 +519,98 @@
 					"response": []
 				},
 				{
+					"name": "set director  OK found",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/8079249/director/6",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"8079249",
+								"director",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set director  KO not found",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url_movie_controller}}/8079249/director/0",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"8079249",
+								"director",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set actors  OK found",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[2,3, 33]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}/8079249/actors",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"8079249",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set actors  KO not found",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[2,3, 5, 33]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_movie_controller}}/8079249/actors",
+							"host": [
+								"{{url_movie_controller}}"
+							],
+							"path": [
+								"8079249",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "update movie",
 					"request": {
 						"method": "PUT",
