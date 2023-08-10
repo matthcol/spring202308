@@ -1,9 +1,16 @@
 package org.example.movieapi.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "persons")
 public class Person {

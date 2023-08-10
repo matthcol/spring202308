@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 @Entity
 @Table(
@@ -19,7 +21,9 @@ import java.util.Set;
 @Builder
 @Getter
 @Setter
-@ToString(of = {"id", "title", "year"})
+@ToString // with @ToString.Exclude on fields to ignore
+// @ToString(of = {"id", "title", "year"})
+// @ToString(exclude = {"director", "actors"})
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,12 +39,29 @@ public class Movie {
     @Column(length = 4000)
     private String synopsis;
 
-    @Transient // ignore by JPA
+
     @Builder.Default
-    private Set<String> genres = new HashSet<>();
+    @ElementCollection(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "have_genre",
+            joinColumns = @JoinColumn(name = "movie_id")
+    )
+    @Column(name = "genre")
+    private Set<String> genres = new TreeSet<>();
 
     // TODO: enum Pg
-    // TODO: genres
-    // TODO: director
-    // TODO: actors
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "director_id") // nullable=true by default
+    private Person director;
+
+    @ToString.Exclude
+    @ManyToMany // LAZY by default
+    @JoinTable(
+            name="play",
+            joinColumns = @JoinColumn(name="movie_id"),
+            inverseJoinColumns = @JoinColumn(name="actor_id")
+    )
+    private Set<Person> actors;
 }

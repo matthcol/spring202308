@@ -124,11 +124,25 @@ public class MovieRepositoryDemoQueries {
             "2018,2019",
             "1989,1980"
     })
-    void testFindByYearBetweenOrderByYear(short year1, short year2){
+    void findByYearBetweenOrderByYear(short year1, short year2){
         var movies = movieRepository.findByYearBetweenOrderByYearAscTitleAsc(year1, year2);
         System.out.println("Movie count: " + movies.size());
         movies.stream()
                 .limit(50)
                 .forEach(System.out::println);
+    }
+
+    @Test
+    void findMovieWithDirectorAndActors(){
+        int id = 76759;
+        movieRepository.findById(id)
+                .ifPresent(movie -> {
+                    System.out.println(movie);
+                    System.out.println("\t- genres: " + movie.getGenres());
+                    System.out.println("\t- director: " + movie.getDirector());
+                    System.out.println("\t- actors: ");
+                    movie.getActors()
+                            .forEach(actor -> System.out.println("\t\t* " + actor));
+                });
     }
 }
