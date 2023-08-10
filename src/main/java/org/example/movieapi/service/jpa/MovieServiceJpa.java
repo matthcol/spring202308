@@ -23,13 +23,8 @@ public class MovieServiceJpa implements MovieService {
 
     @Override
     public Optional<MovieDetail> getById(int id) {
-        var optMovieEntity = movieRepository.findById(id);
-        var movieEntity = optMovieEntity.get();
-        var movieDto = MovieDetail.builder()
-                .title(movieEntity.getTitle())
-                .year(movieEntity.getYear())
-                .build();
-        return Optional.of(movieDto);
+        return movieRepository.findById(id)
+                .map(movieEntity -> modelMapper.map(movieEntity, MovieDetail.class));
     }
 
     @Override
