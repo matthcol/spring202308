@@ -2,6 +2,7 @@ package org.example.movieapi.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.movieapi.enums.PgEnum;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,7 +50,8 @@ public class Movie {
     @Column(name = "genre")
     private Set<String> genres = new TreeSet<>();
 
-    // TODO: enum Pg
+    @Enumerated(EnumType.STRING) // by default ORDINAL
+    private PgEnum pg;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY)

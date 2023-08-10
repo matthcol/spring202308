@@ -145,4 +145,11 @@ public class MovieRepositoryDemoQueries {
                             .forEach(actor -> System.out.println("\t\t* " + actor));
                 });
     }
+
+    @Test
+    void findMoviesByDirector(){
+        var namePattern = "% Eastwood";
+        movieRepository.findByDirector(namePattern)
+                .forEach(System.out::println);
+    }
 }

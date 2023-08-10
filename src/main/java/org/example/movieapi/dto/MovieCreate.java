@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.example.movieapi.enums.PgEnum;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,8 +40,8 @@ public class MovieCreate {
     @Size(min=20, max=4000)
     private String synopsis;
 
-    // TODO: pg
-
     @Builder.Default
     private Set<@NotBlank @Size(min=3) String> genres = new HashSet<>();
+
+    private PgEnum pg;
 }
